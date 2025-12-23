@@ -11,7 +11,7 @@ builder.Services.AddOpenApi();
 // Add MySQL database context
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DrinkDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 26))));
 
 // Add CORS policy
 builder.Services.AddCors(options =>
