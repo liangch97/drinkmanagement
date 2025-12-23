@@ -9,10 +9,13 @@ public class DrinkDbContextFactory : IDesignTimeDbContextFactory<DrinkDbContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<DrinkDbContext>();
         
-        // Use a connection string for design-time operations
-        // This allows migrations to be created without connecting to an actual database
+        // Use environment variable or configuration for design-time operations
+        // Set via: export DB_CONNECTION_STRING="Server=localhost;..."
+        var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+            ?? "Server=localhost;Port=3306;Database=drinkmanagement;User=drinkuser;Password=YourSecurePassword123!;";
+        
         optionsBuilder.UseMySql(
-            "Server=localhost;Port=3306;Database=drinkmanagement;User=root;Password=password;",
+            connectionString,
             new MySqlServerVersion(new Version(8, 0, 26)),
             mySqlOptions => mySqlOptions.EnableRetryOnFailure()
         );

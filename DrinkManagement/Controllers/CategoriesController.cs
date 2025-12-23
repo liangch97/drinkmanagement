@@ -97,7 +97,7 @@ public class CategoriesController : ControllerBase
             return NotFound(new { message = "分类未找到" });
         }
 
-        if (updateDto.Name != null) category.Name = updateDto.Name;
+        if (!string.IsNullOrWhiteSpace(updateDto.Name)) category.Name = updateDto.Name;
         if (updateDto.Description != null) category.Description = updateDto.Description;
 
         await _context.SaveChangesAsync();

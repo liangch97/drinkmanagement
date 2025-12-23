@@ -141,7 +141,7 @@ public class DrinksController : ControllerBase
             drink.CategoryId = updateDto.CategoryId.Value;
         }
 
-        if (updateDto.Name != null) drink.Name = updateDto.Name;
+        if (!string.IsNullOrWhiteSpace(updateDto.Name)) drink.Name = updateDto.Name;
         if (updateDto.Description != null) drink.Description = updateDto.Description;
         if (updateDto.Price.HasValue) drink.Price = updateDto.Price.Value;
         if (updateDto.Stock.HasValue) drink.Stock = updateDto.Stock.Value;

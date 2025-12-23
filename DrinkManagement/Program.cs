@@ -18,6 +18,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
+        // TODO: In production, replace with specific origins
+        // Example: policy.WithOrigins("https://yourdomain.com")
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();

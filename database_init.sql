@@ -5,6 +5,12 @@ CREATE DATABASE IF NOT EXISTS drinkmanagement
 CHARACTER SET utf8mb4 
 COLLATE utf8mb4_unicode_ci;
 
+-- 创建专用数据库用户（推荐，安全性更高）
+-- 注意：在生产环境中使用更强的密码
+CREATE USER IF NOT EXISTS 'drinkuser'@'localhost' IDENTIFIED BY 'YourSecurePassword123!';
+GRANT ALL PRIVILEGES ON drinkmanagement.* TO 'drinkuser'@'localhost';
+FLUSH PRIVILEGES;
+
 USE drinkmanagement;
 
 -- 创建分类表

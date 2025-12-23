@@ -34,15 +34,33 @@ cd drinkmanagement/DrinkManagement
 
 ### 2. 配置数据库连接
 
-编辑 `appsettings.json` 文件，修改数据库连接字符串：
+**重要安全建议：** 创建专用数据库用户而不是使用 root 用户
 
+```sql
+-- 连接到 MySQL
+mysql -u root -p
+
+-- 创建数据库
+CREATE DATABASE drinkmanagement CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 创建专用用户
+CREATE USER 'drinkuser'@'localhost' IDENTIFIED BY 'YourSecurePassword123!';
+
+-- 授予权限
+GRANT ALL PRIVILEGES ON drinkmanagement.* TO 'drinkuser'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+编辑 `DrinkManagement/appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;Database=drinkmanagement;User=root;Password=your_password;"
+    "DefaultConnection": "Server=localhost;Port=3306;Database=drinkmanagement;User=drinkuser;Password=YourSecurePassword123!;"
   }
 }
 ```
+
+**注意：** 生产环境建议使用环境变量存储数据库连接字符串，而不是硬编码在配置文件中。
 
 ### 3. 创建数据库
 
